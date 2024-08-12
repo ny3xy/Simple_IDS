@@ -1,0 +1,4 @@
+any !192.168.1.141:any -> any:any print "not windows Machine"
+any 192.168.1.141:any -> any:any log "Windows machine"
+dns 192.168.1.10:any -> any:any print "Suspicious DNS request detected"
+tcp any:any -> any:80 log "TCP traffic detected on port 80"
