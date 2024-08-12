@@ -3,7 +3,10 @@ from ids.packet import Packet
 from pprint import pprint
 import shlex
 import logging
+import requests
 
+def trigger_webhook(url: str, payload: dict):
+    requests.post(url, json=payload)
 
 @dataclass
 class Rule:
@@ -40,7 +43,7 @@ class Rule:
     def perform_action(self, packet: Packet):
         match self.action:
             case 'alert':
-                pass
+                
             case 'print':
                 pprint({
                     'packet': packet,
@@ -52,6 +55,16 @@ class Rule:
                     'packet': packet,
                     'rule': self
                 })
+                
+        def alert(self, packet: Packet):
+        webhook_url = 'https://example.com/alert'
+        payload = {
+            'message': self.message,
+            'packet': str(packet),
+            'rule': str(self)
+        }
+        trigger_webhook(webhook_url, payload)
+                
 
 
 class RuleReader:
