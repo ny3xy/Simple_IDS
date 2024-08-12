@@ -56,7 +56,7 @@ class Rule:
                     'rule': self
                 })
                 
-        def alert(self, packet: Packet):
+    def alert(self, packet: Packet):
         webhook_url = 'https://example.com/alert'
         payload = {
             'message': self.message,
